@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="Open Opportunities" icon-name="standard:opportunity">
+        <div class="slds-var-p-horizontal_medium">
+            <lightning-input
+                type="search"
+                label="Search by name"
+                onchange={handleSearch}>
+            </lightning-input>
+
+            <template lwc:if={hasData}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={opportunities}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+            <template lwc:else>
+                <p class="slds-var-m-vertical_medium">No open opportunities found.</p>
+            </template>
+
+            <lightning-button
+                class="slds-var-m-top_small"
+                label="Show pipeline total in INR"
+                variant="brand"
+                onclick={handleTotal}>
+            </lightning-button>
+
+            <template lwc:if={totalInr}>
+                <p class="slds-var-m-top_small"><b>Pipeline total:</b> {totalInr}</p>
+            </template>
+            <template lwc:if={errorMessage}>
+                <p class="slds-var-m-top_small slds-text-color_error">{errorMessage}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
